@@ -18,6 +18,7 @@ To Run:
 1. JDK(JRE) 8 or later.
 
 To Build: 
+
 2. maven.
 3. Active Internet Connection for downloading dependencies and maven 
 plugins.
