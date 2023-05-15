@@ -3,7 +3,11 @@
 ```
 git clone https://github.com/Anonymous2716/IMV
 ```
-2. Build using this command (or use your own if you know what you are doing):
+2. Navigate to the project directory:
+```
+cd IMV
+```
+3. Build using this command (or use your own if you know what you are doing):
 ```
 mvn clean package
 ```
