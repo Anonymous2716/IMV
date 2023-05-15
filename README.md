@@ -8,12 +8,12 @@ git clone https://github.com/Anonymous2716/IMV
 mvn clean package
 ```
 
-#How To Run
+# How To Run
 ```
  java -jar IMV-x.x-x.jar 
 ```
 
-#Requirements
+# Requirements
 To Run:
 1. JDK(JRE) 8 or later.
 
