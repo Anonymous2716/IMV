@@ -44,11 +44,12 @@ public class MainViewer extends JFrame {
 
     private JTextPane imageMetadataInfoPane;
     private JScrollPane imageMetadataScrollPane, imageScrollPane;
-    private JButton leftButton, loadImageButton, rightButton, skipImageButton, zoomInButton, zoomOutButton;;
+    private JButton leftButton, loadImageButton, rightButton, skipImageButton, zoomInButton, zoomOutButton;
     private JLabel imageListQuantityLabel, leftQuantityLabel, mainQuantityLabel, metadataInfoTitleLabel, rightQuantityLabel;
     private List<Path> imagePathsList;
     private long mainQuantity, leftQuantity, rightQuantity;
-    private int currentImageIndex, imageListSize;
+    private final int currentImageIndex = 0;
+    private int  imageListSize;
     private final Path mainDirectoryPath, leftDirectoryPath, rightDirectoryPath;
     private ImagePanel imagePanel;
     
@@ -95,6 +96,8 @@ public class MainViewer extends JFrame {
             LogIt.getInstance().logWriter("INFO","Move Left Clicked.");
             if (!imagePathsList.isEmpty()) {
                 copyLeft();
+            } else {
+                LogIt.getInstance().logWriter("INFO", "Nothing to Move");
             }
         });
         leftQuantityLabel = new JLabel();
@@ -109,6 +112,8 @@ public class MainViewer extends JFrame {
             LogIt.getInstance().logWriter("INFO","Move Right Clicked.");
             if (!imagePathsList.isEmpty()) {
                 copyRight();
+            } else {
+                LogIt.getInstance().logWriter("INFO", "Nothing to Move");
             }
         });
         rightQuantityLabel = new JLabel();
@@ -288,7 +293,6 @@ public class MainViewer extends JFrame {
         updateQuantityText();
         
         if (!imagePathsList.isEmpty()) {
-            currentImageIndex = 0;
             displayImage();
         } else {
             imagePanel.setImage(endImage());
@@ -365,7 +369,6 @@ public class MainViewer extends JFrame {
         }
         return stringBuilder.toString();
     }
-
     
     private void displayImage() {
         Path imagePath = imagePathsList.get(currentImageIndex);
@@ -383,26 +386,31 @@ public class MainViewer extends JFrame {
         imagePanel.repaint();
     }
     
-    private void skipImage() {
-        LogIt.getInstance().logWriter("INFO","Skipped \"" + imagePathsList.get(currentImageIndex).toString() + "\" Image.");
+    private void nextImage() {
         if (!imagePathsList.isEmpty()) {
             imagePathsList.remove(currentImageIndex);
         }
         
         if (!imagePathsList.isEmpty()) {
-            if (currentImageIndex >= imagePathsList.size()) {
-                currentImageIndex = 0;
-            }
             displayImage();
         } else {
             imagePanel.setImage(endImage());
             imagePanel.repaint();
         }
+    }
+    
+    private void skipImage() {
+        if (!imagePathsList.isEmpty()){
+            LogIt.getInstance().logWriter("INFO","Skipped \"" + imagePathsList.get(currentImageIndex).toString() + "\" Image.");
+        } else {
+            LogIt.getInstance().logWriter("INFO", "Nothing to Skip.");
+        }
+        nextImage();
         updateQuantityText();
     }
   
     private void copyLeft() {
-        LogIt.getInstance().logWriter("INFO", "Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
+        LogIt.getInstance().logWriter("INFO", "Left, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
         Path sourceFilePath = imagePathsList.get(currentImageIndex);
         Path destinationFilePath = leftDirectoryPath.resolve(sourceFilePath.getFileName());
         
@@ -420,6 +428,7 @@ public class MainViewer extends JFrame {
         } else {
             try {
                 Files.copy(sourceFilePath, destinationFilePath);
+                LogIt.getInstance().logWriter("INFO", "Left, Copied.");
             } catch (IOException ioe) {
                 String emsg = ioe.getMessage();
                 LogIt.getInstance().logWriter("ERROR"," Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
@@ -437,76 +446,64 @@ public class MainViewer extends JFrame {
                 Files.delete(sourceFilePath);
                 LogIt.getInstance().logWriter("INFO","Deleted");
             } catch (IOException e) {
-                LogIt.getInstance().logWriter("ERROR", "IOE deleting \"" + sourceFilePath.toString() + "\" " + e.getMessage());
+                LogIt.getInstance().logWriter("ERROR", "Left, IOE deleting \"" + sourceFilePath.toString() + "\" " + e.getMessage());
                 OptionPanes.errorPane("Left, Cannot Remove Source File" + e.getMessage(), "Cannot Delete");
             }
         } else {
             OptionPanes.errorPane("Left, Source File != Destination File", "Cryptographic Catastrophy");
             LogIt.getInstance().logWriter("Error","Left, Manually check \"" + sourceFilePath.toString() + "\" And \""+ destinationFilePath.toString() + "\"");
         }
-        
-        if (!imagePathsList.isEmpty()) {
-            imagePathsList.remove(currentImageIndex);
-        }
-        if (!imagePathsList.isEmpty()) {
-            if (currentImageIndex >= imagePathsList.size()) {
-                currentImageIndex = 0;
-            }
-            displayImage();
-        } else {
-            imagePanel.setImage(endImage());
-            imagePanel.repaint();
-        }
+      
+        nextImage();
         updateQuantityText();
     }
     
     private void copyRight() {
-        LogIt.getInstance().logWriter("INFO", "Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
+        LogIt.getInstance().logWriter("INFO", "Right, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
         Path sourceFilePath = imagePathsList.get(currentImageIndex);
         Path destinationFilePath = rightDirectoryPath.resolve(sourceFilePath.getFileName());
         
         if (Files.exists(destinationFilePath)) {
             if (OptionPanes.confimationPane("Right, The destination file already exists. Do you want to overwrite it?", "File Exists")) {
-                try {
+                try {  
+                    LogIt.getInstance().logWriter("WARNING", "Right, Overriding \"" + destinationFilePath.toString() + "\"");       
                     Files.copy(sourceFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ioe) {
-                    OptionPanes.errorPane("Right, File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy");
+                    String emsg = ioe.getMessage();
+                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
+                    OptionPanes.errorPane("Right, File Copy IO Error!! " + emsg, "Cannot Copy");
                 }
             }
         } else {
             try {
                 Files.copy(sourceFilePath, destinationFilePath);
-            } catch (IOException e) {
-                 OptionPanes.errorPane("Right, File Copy IO Error " + e.getMessage(), "Cannot Copy");
+                LogIt.getInstance().logWriter("INFO", "Right, Copied.");
+            } catch (IOException ioe) {
+                String emsg = ioe.getMessage();
+                LogIt.getInstance().logWriter("ERROR","Right Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
+                OptionPanes.errorPane("Right, File Copy IO Error " + emsg, "Cannot Copy");
             }
         }
         
         String sourceChecksum = Checksums.getSHA1Checksum(sourceFilePath);
         String destChecksum = Checksums.getSHA1Checksum(destinationFilePath);
-            
+        LogIt.getInstance().logWriter("INFO", "sourceChecksum:" + sourceChecksum + " \n destChecksum :" + destChecksum);
+           
         if (sourceChecksum.equals(destChecksum)) {
             try {
+                LogIt.getInstance().logWriter("INFO","Right, Deleting src: \"" + sourceFilePath.toString() + "\"");
                 Files.delete(sourceFilePath);
-            } catch (IOException e) {
-                OptionPanes.errorPane("Right, Cannot Remove Source File" + e.getMessage(), "Cannot Delete");
+                LogIt.getInstance().logWriter("INFO","Deleted");
+            } catch (IOException ioe) {
+                LogIt.getInstance().logWriter("ERROR", "Right, IOE deleting \"" + sourceFilePath.toString() + "\" " + ioe.getMessage());
+                OptionPanes.errorPane("Left, Cannot Remove Source File" + ioe.getMessage(), "Cannot Delete");
             }
         } else {
             OptionPanes.errorPane("Right, Source File != Destination File", "Cryptographic Catastrophy");
             LogIt.getInstance().logWriter("Error","Right, Manually check \"" + sourceFilePath + "\" And \""+ destinationFilePath + "\"");
         }
         
-        if (!imagePathsList.isEmpty()) {
-            imagePathsList.remove(currentImageIndex);
-        }
-        if (!imagePathsList.isEmpty()) {
-            if (currentImageIndex >= imagePathsList.size()) {
-                currentImageIndex = 0;
-            }
-            displayImage();
-        } else {
-            imagePanel.setImage(endImage());
-            imagePanel.repaint();
-        }
+        nextImage();
         updateQuantityText();
     }
     
@@ -538,6 +535,8 @@ public class MainViewer extends JFrame {
         leftQuantityLabel.setText("Files In Left Directory: " + String.valueOf(leftQuantity));
         rightQuantityLabel.setText("Files in Right Directory: " + String.valueOf(rightQuantity));
         imageListQuantityLabel.setText("Images In Main Directory: " + String.valueOf(imageListSize));
+        
+        LogIt.getInstance().logWriter("INFO", "main: " + mainQuantity + " left: " + leftQuantity + " right: " + rightQuantity + " image: " + imageListSize);
     }
     
     private BufferedImage endImage() {
@@ -546,8 +545,10 @@ public class MainViewer extends JFrame {
             bi = ImageIO.read(getClass().getResourceAsStream("/images/background.png")); 
         } catch (IOException ioe){
             String emsg = ioe.getMessage();
+            LogIt.getInstance().logWriter("INFO", "EndImageIOE " + emsg);
             OptionPanes.errorPane("The end image loading IOE. " + emsg, "There is no end");
         }
         return bi;
     }
 }
+

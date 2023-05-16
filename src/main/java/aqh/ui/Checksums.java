@@ -13,9 +13,11 @@ class Checksums {
             md = MessageDigest.getInstance("SHA-1");
             md.update(Files.readAllBytes(path));
         } catch (NoSuchAlgorithmException nsae) {
+            LogIt.getInstance().logWriter("ERROR", "SHA-1 NoSuchAlgorithException " + nsae.getMessage());
             OptionPanes.errorPane("SHA-1 NoSuchAlgorithException " + nsae.getMessage(), "Cryptographic Error");
         } catch (IOException e) {
-            OptionPanes.errorPane("Cannot Read File For Checksum" + e.getMessage(), "File Reading Error");
+            LogIt.getInstance().logWriter("ERROR", "IOE At File For Checksum. " + e.getMessage());
+            OptionPanes.errorPane("IOE At File For Checksum. " + e.getMessage(), "Checksum File Accessing Error");
         }
         byte[] digest = md.digest();
         return bytesToHex(digest);
