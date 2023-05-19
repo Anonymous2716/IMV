@@ -196,6 +196,7 @@ public class ImageViewer extends JFrame {
         setName("Image Viewer");
 
 
+        //Written by netbeans GUI editor. hence not touching.
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
