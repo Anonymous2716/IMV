@@ -1,6 +1,6 @@
 This Java application, compatible with Java 8 and above, is designed to copy images from one directory to two separate directories.
 
-
+get it from the release page.
 
 
 # How To Build
@@ -31,6 +31,14 @@ To Build:
 2. maven.
 3. Active Internet Connection for downloading dependencies and maven 
 plugins.
+
+# TODO
+further improvements will be done in the future if I have time and mind. such as:
+
+1. Displaying destination directories.
+2. Theme management. etc etc.
+
+
 
 # How Does It Work? 
 This Application goes through all the files in a given directory. And loops through the files one by one to check if its an image file. 
