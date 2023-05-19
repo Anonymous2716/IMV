@@ -192,6 +192,8 @@ public class MainViewer extends JFrame {
         );
         imageScrollPane.setViewportView(imagePanel);
 
+        
+        //Written by netbeans GUI editor. hence not touching.
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
