@@ -180,6 +180,8 @@ public class MainViewer extends JFrame {
         imageScrollPane = new JScrollPane();       
         imagePanel = new ImagePanel();
 
+        
+        //Written by netbeans GUI editor. hence not touching
         GroupLayout imagePanelLayout = new GroupLayout(imagePanel);
         imagePanel.setLayout(imagePanelLayout);
         imagePanelLayout.setHorizontalGroup(
@@ -193,7 +195,6 @@ public class MainViewer extends JFrame {
         imageScrollPane.setViewportView(imagePanel);
 
         
-        //Written by netbeans GUI editor. hence not touching.
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
