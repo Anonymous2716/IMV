@@ -41,6 +41,7 @@ public class ImageViewer extends JFrame {
 
     public ImageViewer() {
         
+        //TODO: implement Application theme choice.
 
        /* if (System.getProperty("os.name").toLowerCase().contains("linux")) {
             // Get the name of the current look and feel
