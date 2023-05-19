@@ -1,3 +1,8 @@
+This Java application, compatible with Java 8 and above, is designed to copy images from one directory to two separate directories.
+
+
+
+
 # How To Build
 1. Clone the repository to your local machine:
 ```
@@ -34,6 +39,6 @@ After loading the images in an `ArrayList<Path>` the application displays each i
 
 The Copy Options uses SHA-1 checksum verification after copying to `destinationFile` and before `sourcefile` deletion. and if they do not match the source file will be kept and an Error message will be shown. Also most of the information should be printed in stdout also a logfile in the given log directory.
 
-This Application catches all the possible Exceptions at runtime and will show a `JOptionPane` with error message. 
+This application is designed to capture any potential exceptions that occur during runtime. In the event of an exception, it will display an error message using a `JOptionPane`.
 
 I wrote this Application for personal Use. Its not perfect but usable.
