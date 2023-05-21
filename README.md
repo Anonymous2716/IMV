@@ -43,13 +43,13 @@ further improvements will be done in the future if I have time and mind. such as
 
 # Screanshots
 Start Window:
-![Start Window](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/start.png)
+![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
 
 Second Window:
-![Second Window](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/main-s.png)
+![Second Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-s.png)
 
 Second Window Fullscreen:
-![Second Window Fullscreen](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/main-b.png)
+![Second Window Fullscreen](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-b.png)
 
 
 # How Does It Work? 
