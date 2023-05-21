@@ -43,7 +43,7 @@ further improvements will be done in the future if I have time and mind. such as
 
 
 # Screanshots
-Start Window:
+Start Window (its smaller than it looks here):
 ![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
 
 Second Window:
