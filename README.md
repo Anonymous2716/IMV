@@ -36,8 +36,20 @@ plugins.
 further improvements will be done in the future if I have time and mind. such as:
 
 1. Displaying destination directories.
-2. Theme management. etc etc.
+2. Better scaling.
+3. default zooming scale.
+4. Theme management. etc etc.
 
+
+# Screanshots
+Start Window:
+![Start Window](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/start.png)
+
+Second Window:
+![Second Window](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/main-s.png)
+
+Second Window Fullscreen:
+![Second Window Fullscreen](https://github.com/Anonymous2716/IMV/tree/main/Screenshots/main-b.png)
 
 
 # How Does It Work? 
