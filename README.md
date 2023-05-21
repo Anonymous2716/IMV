@@ -38,7 +38,8 @@ further improvements will be done in the future if I have time and mind. such as
 1. Displaying destination directories.
 2. Better scaling.
 3. default zooming scale.
-4. Theme management. etc etc.
+4. Theme management. 
+5. Realtime text input validation. etc etc.
 
 
 # Screanshots
