@@ -2,6 +2,7 @@ package aqh.ui;
 
 import java.awt.Label;
 import java.awt.Cursor;
+import java.awt.AWTError;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JFrame;
@@ -303,12 +304,11 @@ public class ImageViewer extends JFrame {
 
         Path[] paths = {Paths.get(mainPath), Paths.get(leftPath), Paths.get(rightPath), Paths.get(logPath)};
 
-        
         for (int i = 0; i < 4; i++) {
             Path path = paths[i];
             String pathStr = path.toString();
             System.out.println();
-            
+
             if (!pathStr.trim().isEmpty()) {
                 if (Files.exists(path)) {
                     pathExistsLogger(i, pathStr);
@@ -365,13 +365,12 @@ public class ImageViewer extends JFrame {
             }
         }
     }
-    
+
     private void chooseFilePath(int button) {
         // Create a file chooser dialog
         JFileChooser chooser = new JFileChooser();
         chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
-        
-        
+
         int returnVal = chooser.showOpenDialog(this);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
             // Get the selected file or directory
@@ -394,7 +393,7 @@ public class ImageViewer extends JFrame {
             }
         }
     }
-    
+
     private void notWritableButReadableDirectory(int i, String pathStr) {
         switch (i) {
             case 0:
@@ -423,7 +422,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void notReadableButWriteableDirectory(int i, String pathStr) {
         switch(i) {
             case 0:
@@ -452,7 +451,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void invalidPath(int i) {
         switch (i) {
             case 0 :
@@ -473,22 +472,22 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private boolean preOkay(Path[] paths) {
-        
+
         boolean mnL;
         boolean mnR;
-     
+
         if (paths[1].equals(paths[2])) {
             isLeftPathValid = true;
             leftMessageLabel.setForeground(COLOR_WARNING);
             leftMessageLabel.setText("Same As Right Path");
-            
+
             isRightPathValid = true;
             rightMessageLabel.setForeground(COLOR_WARNING);
             rightMessageLabel.setText("Same As Leftt Path");
         }
-        
+
         if (paths[0].equals(paths[1])) {
             mnL = false;
             isLeftPathValid = false;
@@ -498,7 +497,7 @@ public class ImageViewer extends JFrame {
         } else {
             mnL = true;
         }
-        
+
         if (paths[0].equals(paths[2])) {
             mnR = false;
             isRightPathValid = false;
@@ -508,12 +507,11 @@ public class ImageViewer extends JFrame {
         } else {
             mnR = true;
         }
-        
+
         return mnL && mnR;
     }
-    
-    private void allOkay(int i, String pathStr) {
 
+    private void allOkay(int i, String pathStr) {
         switch (i) {
             case 0 :
                 isMainPathValid = true;
@@ -541,58 +539,58 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void pathExistsLogger(int i, String pathStr) {
         switch (i) {
-            case 0 : 
+            case 0 :
                 System.err.println("Main Path \"" + pathStr + "\" Exists");
                 break;
-            case 1 : 
+            case 1 :
                 System.out.println("Left Path \"" + pathStr + "\" Exists");
                 break;
-            case 2 : 
+            case 2 :
                 System.out.println("Right Path \"" + pathStr + "\" Exists");
                 break;
-            case 3 : 
+            case 3 :
                 System.out.println("Log Dir Path \"" + pathStr + "\" Exists");
                 break;
         }
     }
-    
+
     private void pathReadableLogger(int i, String pathStr) {
         switch (i) {
-            case 0 : 
+            case 0 :
                 System.out.println("Main Path \"" + pathStr + "\" is Readable");
                 break;
-            case 1 : 
+            case 1 :
                 System.out.println("Left Path \"" + pathStr + "\" is Readable");
                 break;
-            case 2 : 
+            case 2 :
                 System.out.println("Right Path \"" + pathStr + "\" is Readable");
                 break;
-            case 3 : 
+            case 3 :
                 System.out.println("Log Dir Path \"" + pathStr + "\" is Readable");
                 break;
         }
     }
-    
+
     private void pathNotReadableLogger(int i, String pathStr) {
         switch (i) {
-            case 0 : 
+            case 0 :
                 System.out.println( "Main Path \"" + pathStr + "\" is Not Readable");
                 break;
-            case 1 : 
+            case 1 :
                 System.out.println( "Left Path \"" + pathStr + "\" is Not Readable");
                 break;
-            case 2 : 
+            case 2 :
                 System.out.println( "Right Path \"" + pathStr + "\" is Not Readable");
                 break;
-            case 3 : 
+            case 3 :
                 System.out.println( "Log Dir Path \"" + pathStr + "\" is Not Readable");
                 break;
         }
     }
-    
+
     private void pathWritableLogger(int i, String pathStr) {
         switch (i) {
             case 0 :
@@ -609,7 +607,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void notWritableLogger(int i, String pathStr) {
         switch (i) {
             case 0 :
@@ -626,10 +624,10 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void pathIsDirectoryLogger(int i, String pathStr) {
         switch (i) {
-            case 0 : 
+            case 0 :
                 System.out.println( "Main Path \"" + pathStr + "\" Is A Directory");
                 break;
             case 1 :
@@ -642,9 +640,8 @@ public class ImageViewer extends JFrame {
                 System.out.println( "Log Dir Path \"" + pathStr + "\" Is A Directory");
                 break;
         }
-    
     }
-    
+
     private void notADirectoryLoggerAndMessageSetter(int i, String pathStr) {
         switch (i) {
             case 0 :
@@ -652,7 +649,7 @@ public class ImageViewer extends JFrame {
                 mainMessageLabel.setForeground(COLOR_INVALID);
                 mainMessageLabel.setText("Not A Directory");
                 break;
-            case 1 : 
+            case 1 :
                 System.out.println( "Left Path \"" + pathStr + "\" is Not a Directory");
                 leftMessageLabel.setForeground(COLOR_INVALID);
                 leftMessageLabel.setText("Not A Directory");
@@ -669,7 +666,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-     
+
     private void doesNotExistLoggerAndMessageSetter(int i, String pathStr) {
          switch (i) {
             case 0 :
@@ -694,7 +691,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void pathEmptyLoggerAndSetErrorMessage(int i) {
         switch (i) {
             case 0 :
@@ -719,7 +716,7 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void notReadableNotWritableMessageSetter(int i) {
         switch (i) {
             case 0:
@@ -740,17 +737,17 @@ public class ImageViewer extends JFrame {
                 break;
         }
     }
-    
+
     private void clearPathAndMessages() {
         for (int i = 0; i < 3; i++) {
             invalidPath(i);
         }
-        
+
         mainPathField.setText("");
         leftPathField.setText("");
         rightPathField.setText("");
         logPathField.setText("");
-        
+
         mainMessageLabel.setText("");
         leftMessageLabel.setText("");
         rightMessageLabel.setText("");
@@ -759,19 +756,27 @@ public class ImageViewer extends JFrame {
     }
 
     private void startApplication() {
-        
+
         System.out.println("Starting Main Viewer...");
-        
-        java.awt.EventQueue.invokeLater(() -> {
-            new MainViewer();
-        });
-        
+
+        try {
+            java.awt.EventQueue.invokeLater(() -> {
+                new MainViewer();
+            });
+        } catch (Exception | AWTError e) {
+            System.out.println("Error at Startup: " + e.getMessage());
+        }
+
         System.out.println("Main Viewer Started.");
     }
-    
+
     public static void main(String args[]) {
-        SwingUtilities.invokeLater(() -> {
-            new ImageViewer().setVisible(true);
-        });
+        try {
+            SwingUtilities.invokeLater(() -> {
+                new ImageViewer().setVisible(true);
+            });
+        } catch (Exception | AWTError e) {
+            System.out.println("Error at Startup: " + e.getMessage());
+        }
     }
 }
