@@ -4,6 +4,7 @@ import java.awt.Label;
 import java.awt.Cursor;
 import java.awt.AWTError;
 import java.awt.event.ActionEvent;
+import java.awt.HeadlessException;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
@@ -761,7 +762,11 @@ public class ImageViewer extends JFrame {
 
         try {
             java.awt.EventQueue.invokeLater(() -> {
-                new MainViewer();
+                try {
+                    new MainViewer();
+                } catch (HeadlessException e) {
+                    System.out.println("Error at Startup: " + e.getMessage());
+                }
             });
         } catch (Exception | AWTError e) {
             System.out.println("Error at Startup: " + e.getMessage());
@@ -773,9 +778,13 @@ public class ImageViewer extends JFrame {
     public static void main(String args[]) {
         try {
             SwingUtilities.invokeLater(() -> {
-                new ImageViewer().setVisible(true);
+                try {
+                    new ImageViewer().setVisible(true);
+                } catch (HeadlessException e) {
+                    System.out.println("Error at Startup: " + e.getMessage());
+                }
             });
-        } catch (Exception | AWTError e) {
+        } catch (Exception | AWTError  e) {
             System.out.println("Error at Startup: " + e.getMessage());
         }
     }
