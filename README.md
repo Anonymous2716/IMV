@@ -75,7 +75,7 @@ The IMV application is distributed under GPL v3.0 license.
 I don't care whether you use or not. As I said, this is a personal project and it does what I need. Think about that before sending me a blaming email regarding support. If you have lost your data, then only you are responsible for mistakes and misuses. Remember that [author] does not owe anything for you.
 
 ## Credits
- - [Termux] because I wrote this Application in Termux.
+ - [Termux] - Because I wrote this Application in Termux.
 
 
 [Termux]: https://github.com/termux
