@@ -44,7 +44,8 @@ further improvements will be done in the future if I have time and mind. such as
 
 
 # Screanshots
-Start Window (its smaller than it looks here):
+Screen Size: 1536x864
+Start Window:
 ![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
 
 Second Window:
