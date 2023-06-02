@@ -30,8 +30,8 @@ To Run:
 To Build: 
 
 2. maven.
-3. Active Internet Connection for downloading dependencies and maven 
-plugins.
+3. Active Internet Connection for downloading dependencies and maven plugins.
+
 
 # TODO
 further improvements will be done in the future if I have time and mind. such as:
@@ -65,8 +65,6 @@ This application is designed to capture any potential exceptions that occur duri
 
 
 ## INFO
-
-
 This is a personal public project which means it is free and open-source, even if I may accept feature requests I don't guarantee implementing them.
 
 I may rewrite Git history from time to time because it stores few binary files which take noticeable disk space. Coding quality is very far from perfect. I know that but don't care, the app works and this is good.
@@ -81,4 +79,4 @@ I don't care whether you use or not. As I said, this is a personal project and i
 
 [Termux]: https://github.com/termux
 [author]: https://github.com/Anonymous2716
-[release page]: https://github.com/Anonymous2716/IMV/release/latest
+[release page]: https://github.com/Anonymous2716/IMV/releases/latest
