@@ -63,3 +63,13 @@ The Copy Options uses SHA-1 checksum verification after copying to `destinationF
 This application is designed to capture any potential exceptions that occur during runtime. In the event of an exception, it will display an error message using a `JOptionPane`.
 
 I wrote this Application for personal Use. Its not perfect but usable.
+
+
+
+This is a personal public project which means it is free and open-source, even if I may accept feature requests I don't guarantee implementing them.
+
+0I may rewrite Git history from time to time because it stores few binary files which take noticeable disk space. Coding quality is very far from perfect. I know that but don't care, the app works and this is good.
+
+The IMV application is distributed under GPL v3.0 license.
+
+I don't care whether you use or not. As I said, this is a personal project and it does what I need. Think about that before sending me a blaming email regarding support. If you have lost your data, then only you are responsible for mistakes and misuses. Remember that author does not owe anything for you.
