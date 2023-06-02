@@ -1,5 +1,6 @@
 This Java application, compatible with Java 8 and above, is designed to copy images from one directory to two separate directories.
 
+## Downloads
 get it from the [release page].
 
 
@@ -63,7 +64,7 @@ The Copy Options uses SHA-1 checksum verification after copying to `destinationF
 This application is designed to capture any potential exceptions that occur during runtime. In the event of an exception, it will display an error message using a `JOptionPane`.
 
 
-
+## INFO
 
 
 This is a personal public project which means it is free and open-source, even if I may accept feature requests I don't guarantee implementing them.
