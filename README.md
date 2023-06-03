@@ -53,8 +53,7 @@ Start Window:
 Second Window:
 ![Second Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-s.png)
 
-Second Window Fullscreen:
-![Second Window Fullscreen](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-b.png)
+
 
 
 # How Does It Work? 
