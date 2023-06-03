@@ -25,6 +25,7 @@ mvn clean package
 
 # Requirements
 To Run:
+
 1. JDK(JRE) 8 or later.
 
 To Build: 
@@ -34,7 +35,7 @@ To Build:
 
 
 # TODO
-further improvements will be done in the future if I have time and mind. such as:
+Further improvements will be done in the future if I have time and mind. such as:
 
 1. Displaying destination directories.
 2. Better scaling.
