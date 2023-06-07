@@ -18,6 +18,12 @@ cd IMV
 mvn clean package
 ```
 
+Gradle (or use your own if you know what you are doing):
+```
+./gradlew jar --no-daemon
+```
+in which case the final jar file would be in `build/libs` directory.
+
 # How To Run
 ```
  java -jar IMV-x.x-x.jar 
