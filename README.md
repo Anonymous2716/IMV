@@ -51,7 +51,7 @@ Further improvements will be done in the future if I have time and mind. such as
 
 
 # Screanshots
-Screen Size: 1536x864 (80% of 1920x1080).
+Screen Size: 1536x864 (80% WxH of 1920x1080).
 
 Start Window:
 ![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
