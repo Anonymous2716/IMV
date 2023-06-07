@@ -10,10 +10,6 @@ plugins {
 repositories {
     mavenLocal()
     maven {
-        url = uri('file:/data/data/com.termux/files/home/mvn2g/IMV/lib')
-    }
-
-    maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
 }
