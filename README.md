@@ -26,7 +26,7 @@ Gradle:
 ```
 in which case the final jar file would be in `build/libs` directory.
 
-Or use your own commands if you know what you are doing
+Or use your own commands if you know what you are doing.
 
 # How To Run
 ```
