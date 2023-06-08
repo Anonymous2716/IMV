@@ -4,7 +4,9 @@ This Java application, compatible with Java 8 and above, is designed to copy ima
 get it from the [release page].
 
 
-# How To Build
+## How To Build
+Linux:
+
 1. Clone the repository to your local machine:
 ```
 git clone https://github.com/Anonymous2716/IMV
@@ -13,16 +15,18 @@ git clone https://github.com/Anonymous2716/IMV
 ```
 cd IMV
 ```
-3. Build using this command (or use your own if you know what you are doing):
+3. Maven:
 ```
 mvn clean package
 ```
 
-Gradle (or use your own if you know what you are doing):
+Gradle:
 ```
 ./gradlew jar --no-daemon
 ```
 in which case the final jar file would be in `build/libs` directory.
+
+Or use your own commands if you know what you are doing
 
 # How To Run
 ```
