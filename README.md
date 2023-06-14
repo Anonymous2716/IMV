@@ -3,6 +3,10 @@ This Java application, compatible with Java 8 and above, is designed to copy ima
 ## Downloads
 get it from the [release page].
 
+# How To Run
+```
+ java -jar IMV-x.x-x.jar 
+```
 
 ## How To Build
 Linux:
@@ -28,10 +32,7 @@ in which case the final jar file would be in `build/libs` directory.
 
 Or use your own commands if you know what you are doing.
 
-# How To Run
-```
- java -jar IMV-x.x-x.jar 
-```
+
 
 # Requirements
 To Run:
