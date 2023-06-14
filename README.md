@@ -40,7 +40,7 @@ To Run:
 
 To Build: 
 
-2. maven.
+2. maven or gradle.
 3. Active Internet Connection for downloading dependencies and maven plugins.
 
 
