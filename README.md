@@ -44,7 +44,19 @@ To Build:
 3. Active Internet Connection for downloading dependencies and maven plugins.
 
 
-# TODO
+
+
+# Screanshots
+Screen Size: 1536x864 (80% WxH of 1920x1080).
+
+
+Start Window:
+![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
+
+Second Window:
+![Second Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-s.png)
+
+## TODO
 Further improvements will be done in the future if I have time and mind. such as:
 
 1. Displaying destination directories.
@@ -52,16 +64,6 @@ Further improvements will be done in the future if I have time and mind. such as
 3. default zooming scale.
 4. Theme management. 
 5. Realtime text input validation. etc etc.
-
-
-# Screanshots
-Screen Size: 1536x864 (80% WxH of 1920x1080).
-
-Start Window:
-![Start Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/start.png)
-
-Second Window:
-![Second Window](https://github.com/Anonymous2716/IMV/raw/main/Screenshots/main-s.png)
 
 
 
