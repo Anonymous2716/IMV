@@ -287,10 +287,9 @@ public class MainViewer extends JFrame {
                     imagePathsList.add(filePath);
                 }
             }
-        } catch (IOException ex) {
-            String emsg = ex.getMessage();
-            LogIt.getInstance().logWriter("INFO","File Listing Error IOE. " + emsg);
-            OptionPanes.errorPane("IOE Listing Files " + emsg, "Failed To List Images");
+        } catch (IOException ioe) {
+            LogIt.getInstance().logWriter("INFO","File Listing Error IOE. " + ioe.getMessage());
+            OptionPanes.errorPane("IOE Listing Files " + ioe.getMessage(), "Failed To List Images");
         }
         
         updateQuantityText();
@@ -309,10 +308,9 @@ public class MainViewer extends JFrame {
         
         try {
             fileSize = Files.size(filePath);
-        } catch (IOException ex) {
-            String emsg = ex.getMessage();
-            LogIt.getInstance().logWriter("ERROR", "Cannot Check FileSize of \"" + filePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane("File Size Check IOE of \"" + filePath.toString() + "\" " + emsg, "IOE At File Size Ch...");
+        } catch (IOException ioe) {
+            LogIt.getInstance().logWriter("ERROR", "Cannot Check FileSize of \"" + filePath.toString() + "\" " + ioe.getMessage());
+            OptionPanes.errorPane("File Size Check IOE of \"" + filePath.toString() + "\" " + ioe.getMessage(), "IOE At File Size Ch...");
         }
         
         if (!Files.isRegularFile(filePath) && !(fileSize > 0)) {
@@ -324,17 +322,15 @@ public class MainViewer extends JFrame {
         try {
             inputStream = new BufferedInputStream(new FileInputStream(filePath.toFile()));
         } catch (FileNotFoundException fnfe) {
-            String emsg = fnfe.getMessage();
-            LogIt.getInstance().logWriter("ERROR", "Exception At Image Detector FNFE. \"" + filePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane("FileNotFound At Image Detector. " + emsg, "FileNotFoundException");
+            LogIt.getInstance().logWriter("ERROR", "Exception At Image Detector FNFE. \"" + filePath.toString() + "\" " + fnfe.getMessage());
+            OptionPanes.errorPane("FileNotFound At Image Detector. " + fnfe.getMessage(), "FileNotFoundException");
         }
         
         try {
             fileType = FileTypeDetector.detectFileType(inputStream); 
         } catch (IOException ioe) {
-            String emsg = ioe.getMessage();
-            LogIt.getInstance().logWriter("ERROR","Exception At Image Detector InputStream IOE. \"" + filePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane("IOE At Image Detector InputStream \"" + filePath.toString() + "\" " + emsg, "InputStream IOException");
+            LogIt.getInstance().logWriter("ERROR","Exception At Image Detector InputStream IOE. \"" + filePath.toString() + "\" " + ioe.getMessage());
+            OptionPanes.errorPane("IOE At Image Detector InputStream \"" + filePath.toString() + "\" " + ioe.getMessage(), "InputStream IOException");
         }
         return !(fileType.getMimeType() == null);
     }
@@ -346,13 +342,11 @@ public class MainViewer extends JFrame {
         try {
             metadata = ImageMetadataReader.readMetadata(imagePath.toFile());
         } catch (IOException ioe) {
-            String emsg = ioe.getMessage();
-            LogIt.getInstance().logWriter("ERROR","Metadata Reader IOE. \"" + imagePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane("IOException At Metadata Reader" + emsg, "Metadata Readimg Error");
+            LogIt.getInstance().logWriter("ERROR","Metadata Reader IOE. \"" + imagePath.toString() + "\" " + ioe.getMessage());
+            OptionPanes.errorPane("IOException At Metadata Reader" + ioe.getMessage(), "Metadata Readimg Error");
         } catch (ImageProcessingException ipe) {
-            String emsg = ipe.getMessage();
-            LogIt.getInstance().logWriter("ERROR", "Exception Metadata Reader IProcessingE. \"" + imagePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane("Cannot Process Image To Read Metadata. " + emsg, "Metadata Reading Error");
+            LogIt.getInstance().logWriter("ERROR", "Exception Metadata Reader IProcessingE. \"" + imagePath.toString() + "\" " + ipe.getMessage());
+            OptionPanes.errorPane("Cannot Process Image To Read Metadata. " + ipe.getMessage(), "Metadata Reading Error");
         }
 
         // loop through all the metadata directories and tags, and print their values
@@ -381,9 +375,8 @@ public class MainViewer extends JFrame {
         try {
             image = ImageIO.read(imagePath.toFile());
         } catch (IOException ioe) {
-            String emsg = ioe.getMessage();
-            LogIt.getInstance().logWriter("ERROR", "IOE Cannot Display \"" + imagePath.toString() + "\" " + emsg);
-            OptionPanes.errorPane( "IOE Cannot Display \"" + imagePath.toString() + "\" " + emsg + emsg, "Failed To Display Image");
+            LogIt.getInstance().logWriter("ERROR", "IOE Cannot Display \"" + imagePath.toString() + "\" " + ioe.getMessage());
+            OptionPanes.errorPane( "IOE Cannot Display \"" + imagePath.toString() + "\" " + ioe.getMessage(), "Failed To Display Image");
         }
         imagePanel.setImage(image);
         imagePanel.repaint();
@@ -423,9 +416,8 @@ public class MainViewer extends JFrame {
                     LogIt.getInstance().logWriter("WARNING", "Left, Overriding \"" + destinationFilePath.toString() + "\"");
                     Files.copy(sourceFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ioe) {
-                    String emsg = ioe.getMessage();
-                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
-                    OptionPanes.errorPane("Left, Override File Copy IO Error!! " + emsg, "Cannot Copy");
+                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
+                    OptionPanes.errorPane("Left, Override File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy");
                 }
             }
         } else {
@@ -433,9 +425,8 @@ public class MainViewer extends JFrame {
                 Files.copy(sourceFilePath, destinationFilePath);
                 LogIt.getInstance().logWriter("INFO", "Left, Copied.");
             } catch (IOException ioe) {
-                String emsg = ioe.getMessage();
-                LogIt.getInstance().logWriter("ERROR"," Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
-                OptionPanes.errorPane("Left, File Copy IO Error " + emsg, "Cannot Copy");
+                LogIt.getInstance().logWriter("ERROR"," Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
+                OptionPanes.errorPane("Left, File Copy IO Error " + ioe.getMessage(), "Cannot Copy");
             }
         }
         
@@ -448,9 +439,9 @@ public class MainViewer extends JFrame {
                 LogIt.getInstance().logWriter("INFO","Deleting src: \"" + sourceFilePath.toString() + "\"");
                 Files.delete(sourceFilePath);
                 LogIt.getInstance().logWriter("INFO","Deleted");
-            } catch (IOException e) {
-                LogIt.getInstance().logWriter("ERROR", "Left, IOE deleting \"" + sourceFilePath.toString() + "\" " + e.getMessage());
-                OptionPanes.errorPane("Left, Cannot Remove Source File" + e.getMessage(), "Cannot Delete");
+            } catch (IOException ioe) {
+                LogIt.getInstance().logWriter("ERROR", "Left, IOE deleting \"" + sourceFilePath.toString() + "\" " + ioe.getMessage());
+                OptionPanes.errorPane("Left, Cannot Remove Source File" + ioe.getMessage(), "Cannot Delete");
             }
         } else {
             OptionPanes.errorPane("Left, Source File != Destination File", "Cryptographic Catastrophy");
@@ -472,9 +463,8 @@ public class MainViewer extends JFrame {
                     LogIt.getInstance().logWriter("WARNING", "Right, Overriding \"" + destinationFilePath.toString() + "\"");       
                     Files.copy(sourceFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ioe) {
-                    String emsg = ioe.getMessage();
-                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
-                    OptionPanes.errorPane("Right, File Copy IO Error!! " + emsg, "Cannot Copy");
+                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
+                    OptionPanes.errorPane("Right, File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy");
                 }
             }
         } else {
@@ -482,9 +472,8 @@ public class MainViewer extends JFrame {
                 Files.copy(sourceFilePath, destinationFilePath);
                 LogIt.getInstance().logWriter("INFO", "Right, Copied.");
             } catch (IOException ioe) {
-                String emsg = ioe.getMessage();
-                LogIt.getInstance().logWriter("ERROR","Right Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + emsg);
-                OptionPanes.errorPane("Right, File Copy IO Error " + emsg, "Cannot Copy");
+                LogIt.getInstance().logWriter("ERROR","Right Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
+                OptionPanes.errorPane("Right, File Copy IO Error " + ioe.getMessage(), "Cannot Copy");
             }
         }
         
@@ -547,9 +536,8 @@ public class MainViewer extends JFrame {
         try {
             bi = ImageIO.read(getClass().getResourceAsStream("/images/background.png")); 
         } catch (IOException ioe){
-            String emsg = ioe.getMessage();
-            LogIt.getInstance().logWriter("INFO", "EndImageIOE " + emsg);
-            OptionPanes.errorPane("The end image loading IOE. " + emsg, "There is no end");
+            LogIt.getInstance().logWriter("INFO", "EndImageIOE " + ioe.getMessage());
+            OptionPanes.errorPane("The end image loading IOE. " + ioe.getMessage(), "There is no end");
         }
         return bi;
     }
