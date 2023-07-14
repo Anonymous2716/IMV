@@ -405,82 +405,52 @@ public class MainViewer extends JFrame {
         updateQuantityText();
     }
   
-    private void copyLeft() {
-        LogIt.getInstance().logWriter("INFO", "Left, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
-        Path sourceFilePath = imagePathsList.get(currentImageIndex);
-        Path destinationFilePath = leftDirectoryPath.resolve(sourceFilePath.getFileName());
-        
-        if (Files.exists(destinationFilePath)) {
-            if (OptionPanes.confimationPane("Left, The destination file \"" + destinationFilePath.toString() + "\" already exists. Do you want to overwrite it?", "File Exists")) {
-                try {
-                    LogIt.getInstance().logWriter("WARNING", "Left, Overriding \"" + destinationFilePath.toString() + "\"");
-                    Files.copy(sourceFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
-                } catch (IOException ioe) {
-                    LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
-                    OptionPanes.errorPane("Left, Override File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy");
-                }
-            }
-        } else {
-            try {
-                Files.copy(sourceFilePath, destinationFilePath);
-                LogIt.getInstance().logWriter("INFO", "Left, Copied.");
-            } catch (IOException ioe) {
-                LogIt.getInstance().logWriter("ERROR"," Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
-                OptionPanes.errorPane("Left, File Copy IO Error " + ioe.getMessage(), "Cannot Copy");
-            }
-        }
-        
-        String sourceChecksum = Checksums.getSHA1Checksum(sourceFilePath);
-        String destChecksum = Checksums.getSHA1Checksum(destinationFilePath);
-        LogIt.getInstance().logWriter("INFO", "sourceChecksum:" + sourceChecksum + " \n destChecksum :" + destChecksum);
-            
-        if (sourceChecksum.equals(destChecksum)) {
-            try {
-                LogIt.getInstance().logWriter("INFO","Deleting src: \"" + sourceFilePath.toString() + "\"");
-                Files.delete(sourceFilePath);
-                LogIt.getInstance().logWriter("INFO","Deleted");
-            } catch (IOException ioe) {
-                LogIt.getInstance().logWriter("ERROR", "Left, IOE deleting \"" + sourceFilePath.toString() + "\" " + ioe.getMessage());
-                OptionPanes.errorPane("Left, Cannot Remove Source File" + ioe.getMessage(), "Cannot Delete");
-            }
-        } else {
-            OptionPanes.errorPane("Left, Source File != Destination File", "Cryptographic Catastrophy");
-            LogIt.getInstance().logWriter("Error","Left, Manually check \"" + sourceFilePath.toString() + "\" And \""+ destinationFilePath.toString() + "\"");
-        }
-      
-        nextImage();
-        updateQuantityText();
-    }
-    
     private void copyRight() {
-        LogIt.getInstance().logWriter("INFO", "Right, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\".");
+        LogIt.getInstance().logWriter("INFO", "Right, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getRightPathStr() + "\"");
         Path sourceFilePath = imagePathsList.get(currentImageIndex);
         Path destinationFilePath = rightDirectoryPath.resolve(sourceFilePath.getFileName());
+
+        copyImage("Right", sourceFilePath, destinationFilePath);
+    }
+     
+     private void copyLeft() {
+        LogIt.getInstance().logWriter("INFO", "Left, Copying \"" + imagePathsList.get(currentImageIndex).toString() + "\" to \"" + AppVars.getInstance().getLeftPathStr() + "\"");
+        Path sourceFilePath = imagePathsList.get(currentImageIndex);
+        Path destinationFilePath = leftDirectoryPath.resolve(sourceFilePath.getFileName());
+
+        copyImage("Left", sourceFilePath, destinationFilePath);
+    }
+    
+    private void copyImage(String side, Path sourceFilePath, Path destinationFilePath) {
+
+        String sourceChecksum = Checksums.getSHA1Checksum(sourceFilePath);
+        String destChecksum = Checksums.getSHA1Checksum(destinationFilePath);
         
         if (Files.exists(destinationFilePath)) {
-            if (OptionPanes.confimationPane("Right, The destination file already exists. Do you want to overwrite it?", "File Exists")) {
-                try {  
-                    LogIt.getInstance().logWriter("WARNING", "Right, Overriding \"" + destinationFilePath.toString() + "\"");       
+            LogIt.getInstance().logWriter("WARNING", side + ", Override dialog \"" + destinationFilePath.toString() + "\"");
+            if (OptionPanes.confimationPane(side + ", The destination file \"" 
+                    + destinationFilePath.toString() 
+                    + "\" already exists. Do you want to overwrite it?", "File Exists")) {
+                try {
+                    LogIt.getInstance().logWriter("WARNING", side + ", Overriding \"" + destinationFilePath.toString() + "\"");
                     Files.copy(sourceFilePath, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
                 } catch (IOException ioe) {
                     LogIt.getInstance().logWriter("ERROR", "Overriding IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
-                    OptionPanes.errorPane("Right, File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy");
+                    OptionPanes.errorPane(side + ", Override File Copy IO Error!! " + ioe.getMessage(), "Cannot Copy!");
                 }
             }
         } else {
             try {
                 Files.copy(sourceFilePath, destinationFilePath);
-                LogIt.getInstance().logWriter("INFO", "Right, Copied.");
+                LogIt.getInstance().logWriter("INFO", side + ", Copied.");
             } catch (IOException ioe) {
-                LogIt.getInstance().logWriter("ERROR","Right Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
-                OptionPanes.errorPane("Right, File Copy IO Error " + ioe.getMessage(), "Cannot Copy");
+                LogIt.getInstance().logWriter("ERROR", side + ", Copying Error IOE src:\"" + sourceFilePath.toString() + "\"" + " dst:\"" + destinationFilePath.toString() + "\" " + ioe.getMessage());
+                OptionPanes.errorPane(side + ", File Copy IO Error " + ioe.getMessage(), "Cannot Copy");
             }
         }
         
-        String sourceChecksum = Checksums.getSHA1Checksum(sourceFilePath);
-        String destChecksum = Checksums.getSHA1Checksum(destinationFilePath);
         LogIt.getInstance().logWriter("INFO", "sourceChecksum:" + sourceChecksum + " \n destChecksum :" + destChecksum);
-           
+
         if (sourceChecksum.equals(destChecksum)) {
             try {
                 LogIt.getInstance().logWriter("INFO","Right, Deleting src: \"" + sourceFilePath.toString() + "\"");
@@ -488,17 +458,18 @@ public class MainViewer extends JFrame {
                 LogIt.getInstance().logWriter("INFO","Deleted");
             } catch (IOException ioe) {
                 LogIt.getInstance().logWriter("ERROR", "Right, IOE deleting \"" + sourceFilePath.toString() + "\" " + ioe.getMessage());
-                OptionPanes.errorPane("Left, Cannot Remove Source File" + ioe.getMessage(), "Cannot Delete");
+                OptionPanes.errorPane(side + ", Cannot Remove Source File" + ioe.getMessage(), "Cannot Delete");
             }
         } else {
-            OptionPanes.errorPane("Right, Source File != Destination File", "Cryptographic Catastrophy");
-            LogIt.getInstance().logWriter("Error","Right, Manually check \"" + sourceFilePath + "\" And \""+ destinationFilePath + "\"");
+            OptionPanes.errorPane(side + ", Source File != Destination File", "Cryptographic Catastrophy");
+            LogIt.getInstance().logWriter("Error",side + ", Manually check \"" + sourceFilePath + "\" And \""+ destinationFilePath + "\"");
         }
-        
+
         nextImage();
         updateQuantityText();
+
     }
-    
+ 
     private void countFiles() {
         try (Stream<Path> countStream = Files.list(Paths.get(AppVars.getInstance().getMainPathStr()))) {
             mainQuantity = countStream.count();
