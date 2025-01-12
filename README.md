@@ -1,5 +1,10 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/Anonymous2716/IMV?color=0bda51)
 
+![GitHub Release](https://img.shields.io/github/v/release/Anonymous2716/IMV?display_name=tag)
+
+![Github License](https://img.shields.io/github/license/Anonymous2716/IMV?color=0bda51)
+
+
 
 This Java application, compatible with Java 8 and above, is designed to copy images from one directory to two separate directories.
 
