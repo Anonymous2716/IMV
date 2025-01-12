@@ -1,7 +1,5 @@
-![GitHub repo size](https://img.shields.io/github/repo-size/Anonymous2716/IMV?color=0bda51)
-
-![GitHub Release](https://img.shields.io/github/v/release/Anonymous2716/IMV?display_name=tag)
-
+![GitHub repo size](https://img.shields.io/github/repo-size/Anonymous2716/IMV?color=0bda51) 
+![GitHub Release](https://img.shields.io/github/v/release/Anonymous2716/IMV?display_name=tag) 
 ![Github License](https://img.shields.io/github/license/Anonymous2716/IMV?color=0bda51)
 
 
